@@ -112,7 +112,7 @@
                 }
 
                 setCookie('cookUser', username, time, '/');//set 获取用户名和密码 传给cookie  
-                setCookie('cookPass', password, time, '/');   
+                // setCookie('cookPass', password, time, '/');   
 
                 $.ajax({
                     url: '/loginreq',
@@ -148,11 +148,11 @@
             var time = 0;
             $(document).ready(function(){  
                 var username = getCookieValue("cookUser");  
-                var password = getCookieValue("cookPass");  
+                //var password = getCookieValue("cookPass");  
 
-                if (username !='' && password !='' ) {  
+                if (username !='' ){//&& password !='' ) {  
                     $("#username").val(username);  
-                    $("#password").val(password);  
+                    //$("#password").val(password);  
                 }
             });
 
