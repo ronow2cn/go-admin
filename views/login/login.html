@@ -121,7 +121,7 @@
                     success:function(res){
                         var r = res
                         if(r.status){
-                            location.href = '/index'
+                            location.href = '/admin/index'
                         }else{
                             $("#suggest").show().html(r.info); 
                         }

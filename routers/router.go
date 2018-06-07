@@ -13,7 +13,7 @@ var filterAdmin = func(ctx *context.Context) {
 	logs.Info("##### filter url : %s, %v", url, ctx.Input.Session("userinfo"))
 	//TODO 如果判断用户未登录。
 	_, ok := ctx.Input.Session("userinfo").(string)
-	if !ok && url != "/admin" {
+	if !ok && url != "/login" {
 		logs.Info("##### Redirect url : %s", url)
 		ctx.Redirect(302, "/login")
 		return
@@ -23,12 +23,14 @@ var filterAdmin = func(ctx *context.Context) {
 
 func init() {
 
+	LoginController := &controllers.LoginController{}
+	beego.Router("/login", LoginController, "*:Login")
+	beego.Router("/loginreq", LoginController, "*:LoginReq")
+	beego.Router("/logoutreq", LoginController, "*:LogoutReq")
+
 	MainController := &controllers.MainController{}
-	beego.Router("/", MainController, "*:Index")
-	beego.Router("/index", MainController, "*:Index")
-	beego.Router("/login", MainController, "*:Login")
-	beego.Router("/loginreq", MainController, "*:LoginReq")
-	beego.Router("/logoutreq", MainController, "*:LogoutReq")
+	beego.Router("/", MainController, "*:Home")
+	beego.Router("/admin/index", MainController, "*:Index")
 
 	userInfoController := &controllers.UserInfoController{}
 	beego.Router("/admin/userInfo/edit", userInfoController, "get:Edit")
